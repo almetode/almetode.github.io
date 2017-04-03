@@ -1,5 +1,16 @@
 <html>
 <head>
+  <script>
+    app.get('', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === "spicy") {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("wrong");
+    res.sendStatus(403);          
+  }  
+});
 </head>
 <body>
 <p>nice!</p>
